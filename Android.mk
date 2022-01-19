@@ -15,7 +15,7 @@ BUILD_TCMD := true
 
 ifeq ($(BUILD_TCMD),true)
 LOCAL_PATH := $(call my-dir)
-COMMON_CFLAGS := -DWARN_NO_AUDIT -DNO_AUDIT
+COMMON_CFLAGS := -DWARN_NO_AUDIT -DNO_AUDIT -Wno-error
 COMMON_LIBS := parsevent tracecmd
 
 # Build parevent lib
@@ -26,8 +26,8 @@ LOCAL_SRC_FILES := event-parse.c trace-seq.c parse-filter.c \
 
 LOCAL_C_INCLUDES := $(common_target_c_includes) \
 		$(LOCAL_PATH)/include
-LOCAL_CFLAGS := $(COMMON_CFLAGS) $(common_target_cflags)
-LOCAL_MODULE_TAGS := eng
+LOCAL_CFLAGS := $(COMMON_CFLAGS) $(common_target_cflags) -Wno-error
+LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := parsevent
 
 include $(BUILD_STATIC_LIBRARY)
@@ -44,8 +44,8 @@ LOCAL_SRC_FILES := trace-util.c trace-input.c trace-ftrace.c \
 
 LOCAL_C_INCLUDES := $(common_target_c_includes) \
 		$(LOCAL_PATH)/include
-LOCAL_CFLAGS := $(COMMON_CFLAGS) $(common_target_cflags)
-LOCAL_MODULE_TAGS := eng
+LOCAL_CFLAGS := $(COMMON_CFLAGS) $(common_target_cflags) -Wno-error
+LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := tracecmd 
 
 include $(BUILD_STATIC_LIBRARY)
@@ -65,7 +65,7 @@ LOCAL_SHARED_LIBRARIES := libcutils libdl
 LOCAL_C_INCLUDES := $(common_target_c_includes) \
 		$(LOCAL_PATH)/include
 LOCAL_CFLAGS := $(COMMON_CFLAGS) $(common_target_cflags)
-LOCAL_MODULE_TAGS := eng
+LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := trace-cmd
 
 include $(BUILD_EXECUTABLE)
